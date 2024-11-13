@@ -73,13 +73,6 @@ elif nok == 2:
         print("user is un login")
         exit()
 
-
-
-data_users= name , passwd
-read_db = "SELECT * FROM users"
-cursor.execute(read_db)
-data= cursor.fetchall()
-
 def listen_for_messages():
     while True:
         message = s.recv(1024).decode()
