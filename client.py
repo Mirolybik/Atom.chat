@@ -36,21 +36,49 @@ s = socket.socket()
 print(f"[*] Connecting to {SERVER_HOST}:{SERVER_PORT}...")
 s.connect((SERVER_HOST, SERVER_PORT))
 print("[+] Connected.")
-name = input("Enter your name: ")
-passwd = getpass("Enter password: ")
+
+print("1. Registrate")
+print("2. Login")
+nok=int(input("Gouse: "))
+
+def user_check(name,passwd):
+    data_users= name , passwd
+    read_db = "SELECT * FROM users"
+    cursor.execute(read_db)
+    data= cursor.fetchall()
+    if data_users in data:
+        return True
+    else:
+        return False
+
+if nok == 1:
+    name = input("Enter your name: ")
+    passwd = getpass("Enter your password: ")
+    if user_check(name,passwd):
+        print("user is login")
+        exit()
+    else:
+        data_users= name , passwd
+        reqtidb = '''INSERT INTO users (login,password) VALUES (?,?)'''
+        cursor.execute(reqtidb,data_users)
+        db.commit()
+        print("Connect")
+
+elif nok == 2:
+    name = input("Enter your name: ")
+    passwd = getpass("Enter your password: ") 
+    if user_check(name,passwd):
+        print ("Connect")
+    else:
+        print("user is un login")
+        exit()
+
+
 
 data_users= name , passwd
 read_db = "SELECT * FROM users"
 cursor.execute(read_db)
 data= cursor.fetchall()
-
-if data_users in data:
-    print("user is online")
-else:
-    print("user in offline")
-    reqtidb = '''INSERT INTO users (login,password) VALUES (?,?)'''
-    cursor.execute(reqtidb,data_users)
-    db.commit()
 
 def listen_for_messages():
     while True:
