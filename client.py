@@ -1,3 +1,4 @@
+import hashlib as hash
 import sqlite3 as sq
 import socket
 import random
@@ -51,10 +52,12 @@ def user_check(name,passwd):
     else:
         return False
 
+
 if nok == 1:
     name = input("Enter your name: ")
     passwd = getpass("Enter your password: ")
-    if user_check(name,passwd):
+    password_hash = hash.sha256(passwd.encode("utf-8")).hexdigest()
+    if user_check(name,password_hash):
         print("user is login")
         exit()
     else:
@@ -66,8 +69,10 @@ if nok == 1:
 
 elif nok == 2:
     name = input("Enter your name: ")
-    passwd = getpass("Enter your password: ") 
-    if user_check(name,passwd):
+    passwd = getpass("Enter your password: ")
+    password_hash = hash.sha256(passwd.encode("utf-8")).hexdigest()
+
+    if user_check(name,password_hash):
         print ("Connect")
     else:
         print("user is un login")
