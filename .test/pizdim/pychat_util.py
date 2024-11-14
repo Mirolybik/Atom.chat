@@ -1,12 +1,8 @@
-# implementing 3-tier structure: Hall --> Room --> Clients; 
-# 14-Jun-2013
-
 import socket, pdb
 
 MAX_CLIENTS = 30
 PORT = 22222
 QUIT_STRING = '<$quit$>'
-
 
 def create_socket(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -54,7 +50,7 @@ class Hall:
             print("New connection from:", player.name)
             player.socket.sendall(instructions)
 
-        elif "<join>" in msg:
+        elif "join" in msg:
             same_room = False
             if len(msg.split()) >= 2: # error check
                 room_name = msg.split()[1]
@@ -75,13 +71,13 @@ class Hall:
             else:
                 player.socket.sendall(instructions)
 
-        elif "<list>" in msg:
+        elif "list" in msg:
             self.list_rooms(player) 
 
-        elif "<manual>" in msg:
+        elif "manual" in msg:
             player.socket.sendall(instructions)
         
-        elif "<quit>" in msg:
+        elif "quit" in msg:
             player.socket.sendall(QUIT_STRING.encode())
             self.remove_player(player)
 
