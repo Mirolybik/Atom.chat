@@ -61,7 +61,7 @@ if nok == 1:
         print("user is login")
         exit()
     else:
-        data_users= name , passwd
+        data_users= name , password_hash
         reqtidb = '''INSERT INTO users (login,password) VALUES (?,?)'''
         cursor.execute(reqtidb,data_users)
         db.commit()
