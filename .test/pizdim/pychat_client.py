@@ -1,5 +1,4 @@
 import select, socket, sys
-from pychat_util import Room, Hall, Player
 import pychat_util
 
 READ_BUFFER = 4096

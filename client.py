@@ -1,11 +1,8 @@
 import hashlib as hash
 import sqlite3 as sq
-import socket
-import random
+import socket,random,datetime,getpass
 from threading import Thread
-from datetime import datetime
 from colorama import Fore, init, Back
-from getpass import getpass
 
 init()
 
