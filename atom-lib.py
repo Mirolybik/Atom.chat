@@ -17,6 +17,14 @@ def create_socket(address):
         logging.error("Failed to create a socket: %s", e)
         raise
 
+class hall:
+    def __init__(self,name):
+        self.rooms = {}
+        self.room_user = {}
+
+    def new_mb(self,user):
+        user.socket.sendall(b'Please tell us your name:\n')
+
 class Room:
     def __init__(self, name):
         self.users = [] 
