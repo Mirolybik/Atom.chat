@@ -1,8 +1,8 @@
-import socket, pdb,logging
+import socket, logging
 
 logging.basicConfig(level=logging.INFO)
 
-port = 77777
+PORT = 77777
 
 def create_socket(address):
     try:
@@ -13,7 +13,6 @@ def create_socket(address):
         s.listen(7)
         logging.info("Now listening at %s", address)
         return s
-
     except OSError as e:
         logging.error("Failed to create a socket: %s", e)
         raise
